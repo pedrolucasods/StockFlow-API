@@ -55,7 +55,7 @@ export class ProductSchema extends BaseModel {
   @column()
   declare categoryId: number
   @column()
-  declare costPrice: string | null
+  declare costPrice: number | null
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
   @column()
@@ -67,7 +67,7 @@ export class ProductSchema extends BaseModel {
   @column()
   declare name: string
   @column()
-  declare price: string
+  declare price: number
   @column()
   declare quantity: number
   @column()
