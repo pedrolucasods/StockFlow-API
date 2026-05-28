@@ -2,12 +2,12 @@ import { defineConfig } from '@adonisjs/auth'
 import { sessionGuard, sessionUserProvider } from '@adonisjs/auth/session'
 import { tokensGuard, tokensUserProvider } from '@adonisjs/auth/access_tokens'
 import type { InferAuthenticators, InferAuthEvents, Authenticators } from '@adonisjs/auth/types'
-
+import {jwtGuard} from '@maximemrf/adonisjs-jwt/jwt_config'
 const authConfig = defineConfig({
   /**
    * Default guard used when no guard is explicitly specified.
    */
-  default: 'api',
+  default: 'jwt',
 
   guards: {
     /**
@@ -18,6 +18,14 @@ const authConfig = defineConfig({
         tokens: 'accessTokens',
         model: () => import('#models/user'),
       }),
+    }),
+
+    jwt: jwtGuard({
+      tokenExpiresIn:'1h',
+      useCookies:false,
+      provider:sessionUserProvider({
+        model:()=> import('#models/user')
+      })
     }),
 
     /**
