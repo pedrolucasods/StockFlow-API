@@ -19,11 +19,11 @@ router
   .group(() => {
     router
       .group(() => {
-        router.post('signup', [controllers.NewAccount, 'store'])
-        router.post('login', [controllers.AccessTokens, 'store'])
+        router.post('register', [controllers.AuthController, 'register'])
+        router.post('login', [controllers.AuthController, 'login'])
       })
-      .prefix('auth')
-      .as('auth')
+      .prefix('/auth')
+      
 
     router
       .group(() => {
