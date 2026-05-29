@@ -28,9 +28,9 @@ router
       .group(()=>{
         router.get('', [controllers.SuppliersController, 'list'])
         router.get(':id', [controllers.SuppliersController, 'search_supplier'])
-        router.post('', [controllers.SuppliersController, 'create'])
-        router.put(':id', [controllers.SuppliersController, 'update'])
-        router.delete(':id', [controllers.SuppliersController, 'delete'])
+        router.post('', [controllers.SuppliersController, 'create']).use(middleware.role(['admin']))
+        router.put(':id', [controllers.SuppliersController, 'update']).use(middleware.role(['admin']))
+        router.delete(':id', [controllers.SuppliersController, 'delete']).use(middleware.role(['admin']))
       })
       .prefix('/suppliers')
       .use(middleware.auth())
