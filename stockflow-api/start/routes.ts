@@ -24,6 +24,16 @@ router
       })
       .prefix('/auth')
       
+    router
+      .group(()=>{
+        router.get('', [controllers.SuppliersController, 'list'])
+        router.get(':id', [controllers.SuppliersController, 'search_supplier'])
+        router.post('', [controllers.SuppliersController, 'create'])
+        router.put(':id', [controllers.SuppliersController, 'update'])
+        router.delete(':id', [controllers.SuppliersController, 'delete'])
+      })
+      .prefix('/suppliers')
+      .use(middleware.auth())
 
     router
       .group(() => {
