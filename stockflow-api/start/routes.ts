@@ -36,6 +36,17 @@ router
       .use(middleware.auth())
 
     router
+      .group(()=>{
+        router.get('', [controllers.CategoriesController, 'list']),
+        router.get(':id', [controllers.CategoriesController, 'search_category']),
+        router.post('', [controllers.CategoriesController, 'create']).use(middleware.role(['admin'])),
+        router.put(':id', [controllers.CategoriesController, 'update']).use(middleware.role(['admin'])),
+        router.delete(':id', [controllers.CategoriesController, 'delete']).use(middleware.role(['admin']))
+      })
+      .prefix('/categories')
+      .use(middleware.auth())
+
+    router
       .group(() => {
         router.get('profile', [controllers.Profile, 'show'])
         router.post('logout', [controllers.AccessTokens, 'destroy'])
