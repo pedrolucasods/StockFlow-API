@@ -1,6 +1,6 @@
 import vine,{SimpleMessagesProvider} from '@vinejs/vine'
 
-export const SupplierPaginationValidator = vine.compile(
+export const PaginationValidator = vine.compile(
     vine.object({
         page: vine.number().positive().optional(),
         limit: vine.number().positive().max(100).optional()

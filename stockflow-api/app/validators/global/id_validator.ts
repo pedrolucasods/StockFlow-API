@@ -1,9 +1,9 @@
 import vine,{SimpleMessagesProvider} from '@vinejs/vine'
 
-export const SupplierDeleteValidator = vine.compile(
+export const IdValidator = vine.compile(
     vine.object({
         params: vine.object({
-            id: vine.number().positive()
+            id: vine.number().withoutDecimals().positive()
         })
     })
 )
