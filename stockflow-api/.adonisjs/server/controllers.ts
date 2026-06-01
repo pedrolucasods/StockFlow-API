@@ -10,5 +10,6 @@ export const controllers = {
   Profile: () => import('#controllers/profile_controller'),
   AuthController:() => import('#controllers/auth_controller'),
   SuppliersController:() => import('#controllers/suppliers_controller'),
-  CategoriesController:() => import('#controllers/categories_controller')
+  CategoriesController:() => import('#controllers/categories_controller'),
+  ProductsController:() => import('#controllers/products_controller')
 }
