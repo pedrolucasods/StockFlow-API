@@ -1,7 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import { SupplierService } from '#services/supplier_service'
-import { SupplierCreateValidator } from '#validators/supplier/create_supplier_validator'
-import { SupplierUpdateValidator } from '#validators/supplier/update_supplier_validator'
+import { SupplierValidator } from '#validators/supplier_validator'
 import { IdValidator } from '#validators/global/id_validator'
 import { PaginationValidator } from '#validators/global/pagination_validator'
 export default class SuppliersController {
@@ -20,14 +19,14 @@ export default class SuppliersController {
     }
 
     async create({request}: HttpContext){
-        const data = await request.validateUsing(SupplierCreateValidator)
+        const data = await request.validateUsing(SupplierValidator)
         const supplier = await SupplierService.create(data)
         return ({supplier})
     }
 
     async update({request,params}: HttpContext){
         const params_url = {supplier_id:params.id}
-        const data = await request.validateUsing(SupplierUpdateValidator)
+        const data = await request.validateUsing(SupplierValidator)
         data.supplier_id = params_url.supplier_id
         const supplier = await SupplierService.update(data)
         return ({supplier})

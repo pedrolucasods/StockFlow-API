@@ -47,6 +47,17 @@ router
       .use(middleware.auth())
 
     router
+      .group(()=>{
+        router.get('', [controllers.ProductsController, 'list']),
+        router.get(':id', [controllers.ProductsController, 'search_produtc']),
+        router.post('', [controllers.ProductsController, 'create']).use(middleware.role(['admin'])),
+        router.put(':id', [controllers.ProductsController, 'update']).use(middleware.role(['admin'])),
+        router.delete(':id', [controllers.ProductsController, 'delete']).use(middleware.role(['admin']))
+      })
+      .prefix('/products')
+      .use(middleware.auth())
+
+    router
       .group(() => {
         router.get('profile', [controllers.Profile, 'show'])
         router.post('logout', [controllers.AccessTokens, 'destroy'])

@@ -2,7 +2,7 @@ import vine,{SimpleMessagesProvider} from '@vinejs/vine'
 
 const brPhoneRegex = /^(?:\+55\s?)?(?:\(?([1-9][1-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/
 
-export const SupplierUpdateValidator = vine.compile(
+export const SupplierValidator = vine.compile(
     vine.object({
         name: vine.string().minLength(5).maxLength(150),
         email: vine.string().maxLength(150),

@@ -1,6 +1,6 @@
 import vine,{SimpleMessagesProvider} from '@vinejs/vine'
 
-export const CategoryUpdateValidator = vine.compile(
+export const CategoryValidator = vine.compile(
     vine.object({
         name: vine.string().minLength(5).maxLength(150),
         description: vine.string().minLength(5).maxLength(300)
