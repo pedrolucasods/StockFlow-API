@@ -7,7 +7,7 @@ import { IdValidator } from '#validators/global/id_validator'
 
 export default class ProductsController {
     async list({request}:HttpContext){
-        const query_payload = request.validateUsing(PaginationValidator)
+        const query_payload = request.validateUsing(PaginationValidator, {data: request.qs()})
         const page = (await query_payload).page ?? 1
         const limit = (await query_payload).limit ?? 10
         const list_products = await ProductService.list(page,limit)

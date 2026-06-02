@@ -21,6 +21,9 @@ export type ScannedRoutes = {
     'products.create': { paramsTuple?: []; params?: {} }
     'products.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'products.delete': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'stock_movements.list': { paramsTuple?: []; params?: {} }
+    'stock_movements.search_stockmovement': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'stock_movements.create': { paramsTuple?: []; params?: {} }
     'profile.profile.show': { paramsTuple?: []; params?: {} }
     'profile.access_tokens.destroy': { paramsTuple?: []; params?: {} }
   }
@@ -31,6 +34,8 @@ export type ScannedRoutes = {
     'categories.search_category': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'products.list': { paramsTuple?: []; params?: {} }
     'products.search_produtc': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'stock_movements.list': { paramsTuple?: []; params?: {} }
+    'stock_movements.search_stockmovement': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'profile.profile.show': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
@@ -40,6 +45,8 @@ export type ScannedRoutes = {
     'categories.search_category': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'products.list': { paramsTuple?: []; params?: {} }
     'products.search_produtc': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'stock_movements.list': { paramsTuple?: []; params?: {} }
+    'stock_movements.search_stockmovement': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'profile.profile.show': { paramsTuple?: []; params?: {} }
   }
   POST: {
@@ -48,6 +55,7 @@ export type ScannedRoutes = {
     'suppliers.create': { paramsTuple?: []; params?: {} }
     'categories.create': { paramsTuple?: []; params?: {} }
     'products.create': { paramsTuple?: []; params?: {} }
+    'stock_movements.create': { paramsTuple?: []; params?: {} }
     'profile.access_tokens.destroy': { paramsTuple?: []; params?: {} }
   }
   PUT: {
