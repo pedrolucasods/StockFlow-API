@@ -58,6 +58,15 @@ router
       .use(middleware.auth())
 
     router
+      .group(()=>{
+        router.get('', [controllers.StockMovementsController, 'list']),
+        router.get(':id', [controllers.StockMovementsController, 'search_stockmovement']),
+        router.post('', [controllers.StockMovementsController, 'create'])
+  
+      })
+      .prefix('/stock-movements')
+      .use(middleware.auth())
+    router
       .group(() => {
         router.get('profile', [controllers.Profile, 'show'])
         router.post('logout', [controllers.AccessTokens, 'destroy'])
