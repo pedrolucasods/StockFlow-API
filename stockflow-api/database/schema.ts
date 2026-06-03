@@ -121,7 +121,7 @@ export class SupplierSchema extends BaseModel {
 }
 
 export class UserSchema extends BaseModel {
-  static $columns = ['createdAt', 'email', 'id', 'name', 'password', 'role', 'updatedAt'] as const
+  static $columns = ['createdAt', 'email', 'id', 'isActive', 'name', 'password', 'role', 'updatedAt'] as const
   $columns = UserSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -129,6 +129,8 @@ export class UserSchema extends BaseModel {
   declare email: string
   @column({ isPrimary: true })
   declare id: number
+  @column()
+  declare isActive: boolean
   @column()
   declare name: string | null
   @column({ serializeAs: null })
