@@ -8,6 +8,10 @@ import type { Authenticators } from '@adonisjs/auth/types'
 export default class AuthMiddleware {
   async handle(ctx: HttpContext,next: NextFn,options: {guards?: (keyof Authenticators)[]} = {}) {
     await ctx.auth.authenticateUsing(options.guards)
+    const user = ctx.auth.user
+    if(!user?.isActive){
+      throw new ForbiddenException('User account is inactive!')
+    }
     return next()
   }
 }
