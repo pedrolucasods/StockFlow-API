@@ -34,6 +34,7 @@ router
       })
       .prefix('/suppliers')
       .use(middleware.auth())
+      .use(middleware.isActive())
 
     router
       .group(()=>{
@@ -45,6 +46,7 @@ router
       })
       .prefix('/categories')
       .use(middleware.auth())
+      .use(middleware.isActive())
 
     router
       .group(()=>{
@@ -56,6 +58,7 @@ router
       })
       .prefix('/products')
       .use(middleware.auth())
+      .use(middleware.isActive())
 
     router
       .group(()=>{
@@ -66,6 +69,7 @@ router
       })
       .prefix('/stock-movements')
       .use(middleware.auth())
+      .use(middleware.isActive())
     router
       .group(() => {
         router.get('profile', [controllers.Profile, 'show'])
@@ -74,5 +78,6 @@ router
       .prefix('account')
       .as('profile')
       .use(middleware.auth())
+      .use(middleware.isActive())
   })
   .prefix('/api/v1')
