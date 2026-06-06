@@ -23,7 +23,15 @@ router
         router.post('login', [controllers.AuthController, 'login'])
       })
       .prefix('/auth')
-      
+    
+    router
+      .group(() => {
+        router.patch(':id/status', [controllers.UsersController, 'update_status'] ).use(middleware.role(['admin']))
+      })
+      .prefix('/users')
+      .use(middleware.auth())
+      .use(middleware.isActive())
+
     router
       .group(()=>{
         router.get('', [controllers.SuppliersController, 'list'])
