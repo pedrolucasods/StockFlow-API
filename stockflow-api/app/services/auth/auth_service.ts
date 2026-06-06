@@ -15,7 +15,7 @@ interface RegisterUser{
   password:string
 }
 
-export class UserService {
+export class AuthService {
   // Your code here
   static async login(data: LoginUser){
     const find_user = await User.findBy('email',data.email)

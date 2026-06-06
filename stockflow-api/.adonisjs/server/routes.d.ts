@@ -6,6 +6,7 @@ export type ScannedRoutes = {
   ALL: {
     'auth.register': { paramsTuple?: []; params?: {} }
     'auth.login': { paramsTuple?: []; params?: {} }
+    'users.update_status': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'suppliers.list': { paramsTuple?: []; params?: {} }
     'suppliers.search_supplier': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'suppliers.create': { paramsTuple?: []; params?: {} }
@@ -57,6 +58,9 @@ export type ScannedRoutes = {
     'products.create': { paramsTuple?: []; params?: {} }
     'stock_movements.create': { paramsTuple?: []; params?: {} }
     'profile.access_tokens.destroy': { paramsTuple?: []; params?: {} }
+  }
+  PATCH: {
+    'users.update_status': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   PUT: {
     'suppliers.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
