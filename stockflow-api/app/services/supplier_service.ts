@@ -79,8 +79,7 @@ export class SupplierService {
         }
         
         const supplier_same_cnpj = await this.search_supplier_cnpj(data.cnpj)
-        if(supplier_same_cnpj) {
-            if(supplier_same_cnpj.id != find_supplier.id)
+        if(supplier_same_cnpj && supplier_same_cnpj.id != find_supplier.id) {
             throw new ValidationException('Registration Failed!')
         }
 
