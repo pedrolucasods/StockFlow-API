@@ -26,6 +26,9 @@ router
     
     router
       .group(() => {
+        router.get('', [controllers.UsersController, 'list']).use(middleware.role(['admin'])),
+        router.get(':id', [controllers.UsersController, 'search_user']).use(middleware.role(['admin'])),
+        router.put(':id', [controllers.UsersController, 'update']).use(middleware.role(['admin'])),
         router.patch(':id/status', [controllers.UsersController, 'update_status'] ).use(middleware.role(['admin']))
       })
       .prefix('/users')

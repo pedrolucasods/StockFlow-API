@@ -6,6 +6,9 @@ export type ScannedRoutes = {
   ALL: {
     'auth.register': { paramsTuple?: []; params?: {} }
     'auth.login': { paramsTuple?: []; params?: {} }
+    'users.list': { paramsTuple?: []; params?: {} }
+    'users.search_user': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'users.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'users.update_status': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'suppliers.list': { paramsTuple?: []; params?: {} }
     'suppliers.search_supplier': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -29,6 +32,8 @@ export type ScannedRoutes = {
     'profile.access_tokens.destroy': { paramsTuple?: []; params?: {} }
   }
   GET: {
+    'users.list': { paramsTuple?: []; params?: {} }
+    'users.search_user': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'suppliers.list': { paramsTuple?: []; params?: {} }
     'suppliers.search_supplier': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'categories.list': { paramsTuple?: []; params?: {} }
@@ -40,6 +45,8 @@ export type ScannedRoutes = {
     'profile.profile.show': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
+    'users.list': { paramsTuple?: []; params?: {} }
+    'users.search_user': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'suppliers.list': { paramsTuple?: []; params?: {} }
     'suppliers.search_supplier': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'categories.list': { paramsTuple?: []; params?: {} }
@@ -59,13 +66,14 @@ export type ScannedRoutes = {
     'stock_movements.create': { paramsTuple?: []; params?: {} }
     'profile.access_tokens.destroy': { paramsTuple?: []; params?: {} }
   }
-  PATCH: {
-    'users.update_status': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-  }
   PUT: {
+    'users.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'suppliers.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'categories.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'products.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+  }
+  PATCH: {
+    'users.update_status': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   DELETE: {
     'suppliers.delete': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }

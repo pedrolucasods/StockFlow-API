@@ -7,7 +7,18 @@ interface UserStatusUpdate {
     is_active: boolean
 }
 
+interface UserUpdate{
+    user_id:number,
+    name:string,
+    email:string
+}
+
 export class UserService {
+
+    static async list(page:any,limit:any){
+        const list_users = await User.query().orderBy('id','desc').paginate(page,limit)
+        return list_users
+    }
 
     static async search_user_id(id: any) {
         const user = await User.findBy('id', id)
@@ -17,10 +28,33 @@ export class UserService {
         return user
     }
 
+    static async search_user_email(email: any) {
+        const user = await User.findBy('email', email)
+        return user
+    }
+
     static async total_activated_admins() {
         const result = await User.query().where('is_active', true).where('role', 'admin').count('* as total')
         const total_admins = result[0].$extras.total
         return total_admins
+    }
+
+    static async update(data:UserUpdate){
+        const find_user = await this.search_user_id(data.user_id)
+        if(data.name == find_user.name && data.email == find_user.email){
+            throw new ValidationException('The user already has this data.')
+        }
+        const user_same_email = await this.search_user_email(data.email)
+        if(user_same_email && user_same_email.id != find_user.id){
+            throw new ValidationException('Update Failed!')
+        }
+
+        const update_user = find_user.merge({
+            name:data.name,
+            email:data.email
+        })
+
+        return await update_user.save()
     }
 
     static async update_status(data: UserStatusUpdate) {
