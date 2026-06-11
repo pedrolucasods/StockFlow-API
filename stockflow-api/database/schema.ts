@@ -47,6 +47,23 @@ export class CategorySchema extends BaseModel {
   declare updatedAt: DateTime | null
 }
 
+export class PasswordResetSchema extends BaseModel {
+  static $columns = ['createdAt', 'expiresAt', 'id', 'recoveryCode', 'updatedAt', 'userId'] as const
+  $columns = PasswordResetSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.dateTime()
+  declare expiresAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare recoveryCode: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare userId: number
+}
+
 export class ProductSchema extends BaseModel {
   static $columns = ['barcode', 'categoryId', 'costPrice', 'createdAt', 'description', 'id', 'minimumQuantity', 'name', 'price', 'quantity', 'sku', 'supplierId', 'updatedAt'] as const
   $columns = ProductSchema.$columns
