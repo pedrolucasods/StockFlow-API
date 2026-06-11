@@ -72,10 +72,11 @@
     "@tuyau/core": "^1.2.2",
     "@vinejs/vine": "^4.3.0",
     "better-sqlite3": "^12.6.2",
-     "cpf-cnpj-validator": "^2.1.2",
+    "cpf-cnpj-validator": "^2.1.2",
     "faker-br": "^0.5.0",
     "luxon": "^3.7.2",
     "mysql2": "^3.19.0",
+    "nanoid": "^5.1.11",
     "reflect-metadata": "^0.2.2"
   },
   "hotHook": {
