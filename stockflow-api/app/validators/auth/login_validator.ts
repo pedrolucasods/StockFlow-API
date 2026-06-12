@@ -1,7 +1,7 @@
 import vine,{SimpleMessagesProvider} from '@vinejs/vine'
 
 
-export const ValidadorLogin = vine.compile(
+export const ValidatorLogin = vine.compile(
     vine.object({
         email: vine.string().email().maxLength(150),
         password: vine.string().minLength(6).maxLength(150)
