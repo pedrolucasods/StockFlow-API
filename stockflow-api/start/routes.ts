@@ -19,8 +19,9 @@ router
   .group(() => {
     router
       .group(() => {
-        router.post('register', [controllers.AuthController, 'register'])
-        router.post('login', [controllers.AuthController, 'login'])
+        router.post('register', [controllers.AuthController, 'register']),
+        router.post('login', [controllers.AuthController, 'login']),
+        router.post('forgot-password', [controllers.AuthController, 'forgot_password'])
       })
       .prefix('/auth')
     
