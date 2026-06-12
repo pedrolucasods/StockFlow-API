@@ -31,8 +31,11 @@ export class PasswordResetService {
         recoveryCode:user_code_reset,
         expiresAt:expires_time
       })
-      await this.send_email_code(find_user.email,user_code_reset)
-
+      const send_email = await this.send_email_code(find_user.email,user_code_reset)
+      if(send_email.error){
+        await this.delete(find_last_code.id)
+        throw new ValidationException(send_email.error.message)
+      }
       return save_code
 
     } catch (error) {
@@ -43,6 +46,14 @@ export class PasswordResetService {
   static search_last_code(user_id:any){
     const find_code = PasswordReset.query().where('user_id',user_id).orderBy('id','desc').first()
     return find_code
+  }
+
+  static async delete(id:any){
+    const find_code = await PasswordReset.findBy('id',id)
+    if(!find_code){
+      throw new NotFoundException('Code Reset Not Found!')
+    }
+    return find_code.delete()
   }
 
   static async send_email_code(email:any,code_reset:any){
