@@ -7,6 +7,7 @@ export type ScannedRoutes = {
     'auth.register': { paramsTuple?: []; params?: {} }
     'auth.login': { paramsTuple?: []; params?: {} }
     'auth.forgot_password': { paramsTuple?: []; params?: {} }
+    'auth.reset_password': { paramsTuple?: []; params?: {} }
     'users.list': { paramsTuple?: []; params?: {} }
     'users.search_user': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'users.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -68,14 +69,15 @@ export type ScannedRoutes = {
     'stock_movements.create': { paramsTuple?: []; params?: {} }
     'profile.access_tokens.destroy': { paramsTuple?: []; params?: {} }
   }
+  PATCH: {
+    'auth.reset_password': { paramsTuple?: []; params?: {} }
+    'users.update_status': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+  }
   PUT: {
     'users.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'suppliers.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'categories.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'products.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
-  }
-  PATCH: {
-    'users.update_status': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   DELETE: {
     'suppliers.delete': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }

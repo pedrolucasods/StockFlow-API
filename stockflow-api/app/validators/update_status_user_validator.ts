@@ -1,6 +1,6 @@
 import vine,{SimpleMessagesProvider} from '@vinejs/vine'
 
-export const UpdateStatusUserValidador = vine.compile(
+export const UpdateStatusUserValidator = vine.compile(
     vine.object({
         is_active:vine.boolean()
     })
