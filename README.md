@@ -1,42 +1,40 @@
 # StockFlow-API
-API REST para gerenciamento de estoque com autenticação, controle de produtos, categorias, fornecedores e movimentações, focada em organização de dados, regras de negócio e estrutura de backend escalável.
+API REST para gerenciamento de estoque: produtos, categorias, fornecedores, movimentações e autenticação.
 
 ---
 
 ## Tecnologias
 
-* Node.js
-* TypeScript
-* AdonisJS
-* Lucid ORM
-* JWT Authentication
-* MySQL
+- Node.js
+- TypeScript
+- AdonisJS
+- Lucid ORM
+- JWT
+- MySQL (ou outra base suportada pelo Adonis)
 
 ---
 
-## Funcionalidades
+## Funcionalidades principais
 
-* Autenticação de usuários
-* Controle de permissões (admin/user)
-* CRUD de produtos
-* CRUD de categorias
-* CRUD de fornecedores
-* Controle de estoque
-* Movimentações de entrada e saída
-* Histórico de movimentações
-* Validação de dados
-* Paginação e filtros
+- Autenticação e controle de sessões
+- Gestão de usuários com roles (admin / user)
+- CRUD de produtos, categorias e fornecedores
+- Controle de estoque com movimentações (entrada/saída/ajuste)
+- Validações e paginação
+- Migrations e seeders para popular o banco
 
 ---
 
 ## Estrutura do projeto
 
-```bash id="proj1"
+```bash
 app/
 ├── controllers/
 ├── services/
 ├── validators/
 ├── middleware/
+├── transformers/
+├── models/
 ├── utils/
 
 database/
@@ -45,246 +43,109 @@ database/
 
 start/
 ├── routes.ts
+
+bin/
+├── server.ts
 ```
 
 ---
 
-## Entidades
+## Variáveis de ambiente (exemplo)
 
-### Users
+As variáveis abaixo são as esperadas pelo projeto (definidas em `start/env.ts` e usadas em `config/database.ts`):
 
-```txt id="users1"
-id
-name
-email
-password
-role
-created_at
-updated_at
+```env
+NODE_ENV=development
+PORT=3333
+HOST=127.0.0.1
+LOG_LEVEL=info
+
+APP_KEY=alguma_chave_secreta
+APP_URL=http://localhost:3333
+SESSION_DRIVER=cookie
+
+# Database (usadas pelo config/database.ts)
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=senha
+DB_DATABASE=stock
+# Resend (serviço de email)
+RESEND_API_KEY=seu_token_resend_aqui
 ```
 
----
-
-### Products
-
-```txt id="prod1"
-id
-name
-description
-sku
-barcode
-price
-cost_price
-quantity
-minimum_quantity
-category_id
-supplier_id
-created_at
-updated_at
-```
+Adapte os valores conforme seu ambiente.
 
 ---
 
-### Categories
+## Scripts úteis (via `package.json`)
 
-```txt id="cat1"
-id
-name
-description
-created_at
-updated_at
-```
-
----
-
-### Suppliers
-
-```txt id="sup1"
-id
-name
-email
-phone
-cnpj
-address
-created_at
-updated_at
-```
+- `npm run start` — inicia o servidor usando `tsx bin/server.ts`
+- `npm run dev` — modo dev do Adonis (`tsx ace`)
+- `npm run dev:api` — inicia o server com `--watch`
+- `npm run dev:nodemon` — inicia com `nodemon` para reload
+- `npm run build` — build do Adonis (`node ace build`)
+- `npm run lint` — roda o ESLint
+- `npm run format` — formata com Prettier
+- `npm run typecheck` — checa tipos com `tsc --noEmit`
 
 ---
 
-### Stock Movements
+## Banco de dados
 
-```txt id="mov1"
-id
-product_id
-user_id
-type
-quantity
-reason
-created_at
-updated_at
-```
+Rode migrations e seeders usando os comandos do Ace:
 
----
-
-## Tipos de movimentação
-
-```ts id="movtype"
-ENTRY
-EXIT
-ADJUSTMENT
-```
-
----
-
-## Relacionamentos
-
-```txt id="rels1"
-Product belongsTo Category
-Product belongsTo Supplier
-Product hasMany StockMovements
-
-Category hasMany Products
-
-Supplier hasMany Products
-
-User hasMany StockMovements
-```
-
----
-
-## Regras de negócio
-
-* SKU deve ser único
-* Não permitir estoque negativo
-* Movimentações obrigatórias para alterações de estoque
-* Apenas usuários autenticados acessam rotas protegidas
-* Admin pode gerenciar produtos, categorias e fornecedores
-
----
-
-## Estrutura de arquitetura
-
-* Controllers: recebem requests e retornam responses
-* Services: regras de negócio (SKU, estoque, validações complexas)
-* Validators: validação de entrada de dados
-* Middleware: autenticação e permissões
-* Utils: funções genéricas reutilizáveis
-
----
-
-## Instalação
-
-```bash id="inst1"
-git clone <repo-url>
-```
-
-```bash id="inst2"
-npm install
-```
-
----
-
-## Configuração .env
-
-```env id="env1"
-DB_CONNECTION=mysql
-MYSQL_HOST=localhost
-MYSQL_PORT=3306
-MYSQL_USER=root
-MYSQL_PASSWORD=password
-MYSQL_DB_NAME=stock
-```
-
----
-
-## Migrations
-
-```bash id="mig1"
+```bash
 node ace migration:run
-```
-
----
-
-## Seeders
-
-```bash id="seed1"
 node ace db:seed
 ```
 
+Se usar MySQL, instale o driver já presente nas dependências (`mysql2`).
+
 ---
 
-## Executar projeto
+## Executando localmente
 
-```bash id="run1"
-node ace serve --watch
+1. Instale dependências:
+
+```bash
+npm install
 ```
 
----
+2. Copie `.env.example` para `.env` e ajuste as variáveis (ou crie um `.env` com as chaves acima).
 
-## Rotas principais
+3. Rode migrations e seeders (se necessário):
 
-### Auth
-
-```http id="auth1"
-POST /login
-POST /register
+```bash
+node ace migration:run
+node ace db:seed
 ```
 
----
+4. Inicie em modo desenvolvimento:
 
-### Products
-
-```http id="prodroute"
-GET /products
-GET /products/:id
-POST /products
-PUT /products/:id
-DELETE /products/:id
+```bash
+npm run dev:api
+# ou
+npm run dev:nodemon
 ```
 
----
-
-### Categories
-
-```http id="catroute"
-GET /categories
-POST /categories
-PUT /categories/:id
-DELETE /categories/:id
-```
+O servidor padrão escuta a porta definida em `PORT` (ex.: `http://localhost:3333`).
 
 ---
 
-### Suppliers
+## Rotas principais (resumo)
 
-```http id="suproute"
-GET /suppliers
-POST /suppliers
-PUT /suppliers/:id
-DELETE /suppliers/:id
-```
+- Auth: `POST /login`, `POST /register`
+- Products: `GET /products`, `GET /products/:id`, `POST /products`, `PUT /products/:id`, `DELETE /products/:id`
+- Categories: `GET /categories`, `POST /categories`, `PUT /categories/:id`, `DELETE /categories/:id`
+- Suppliers: `GET /suppliers`, `POST /suppliers`, `PUT /suppliers/:id`, `DELETE /suppliers/:id`
+- Stock Movements: `GET /stock-movements`, `POST /stock-movements`
 
----
-
-### Stock Movements
-
-```http id="movroute"
-GET /stock-movements
-POST /stock-movements
-```
+Consulte [start/routes.ts](stockflow-api/start/routes.ts#L1) para o mapa completo de rotas.
 
 ---
 
-## Objetivo do projeto
+## Licença
 
-Praticar desenvolvimento backend com foco em:
+Projeto licenciado sob MIT.
 
-* arquitetura de APIs REST
-* autenticação JWT
-* modelagem de banco de dados relacional
-* regras de negócio
-* organização de código em camadas
-* uso de AdonisJS em projetos reais
-
----
