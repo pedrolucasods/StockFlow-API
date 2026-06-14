@@ -6,6 +6,13 @@ import ValidationException from "#exceptions/validation_exception";
 import env from '#start/env'
 import {Resend} from 'resend'
 import { DateTime } from "luxon";
+import hash from "@adonisjs/core/services/hash";
+
+interface PasswordResetInterface{
+  email:string,
+  recovery_code:string,
+  password:string
+}
 
 export class PasswordResetService {
   static async create_code_reset(email:any){
@@ -48,6 +55,11 @@ export class PasswordResetService {
     return find_code
   }
 
+  static search_code(code:any,user_id:any){
+    const find_code = PasswordReset.query().where('recovery_code',code).where('user_id',user_id).orderBy('id','desc').first()
+    return find_code
+  }
+
   static async delete(id:any){
     const find_code = await PasswordReset.findBy('id',id)
     if(!find_code){
@@ -80,5 +92,27 @@ export class PasswordResetService {
       subject: 'Reset Password Code',
       html:message
     })
+  }
+
+  static async reset_password(data:PasswordResetInterface){
+    const find_user = await UserService.search_user_email(data.email)
+    if(!find_user || !find_user.isActive){
+      throw new NotFoundException('User Not Found!')
+    }
+
+    const find_code = await this.search_code(data.recovery_code,find_user.id)
+    if(!find_code || find_code.expiresAt <= DateTime.now()){
+      throw new ValidationException('Invalid code!')
+    }
+
+    const verify_same_password = await hash.verify(find_user.password,data.password)
+    if(verify_same_password){
+      throw new ValidationException('The new password cannot be the same as the current password')
+    }
+    const reset_password = find_user.merge({password:data.password})
+    const invalid_code = find_code.merge({expiresAt:DateTime.now()})
+    const changed_password = await reset_password.save()
+    await invalid_code.save()
+    return changed_password
   }
 }
