@@ -11,10 +11,10 @@ export interface Registry {
     methods: ["POST"]
     pattern: '/api/v1/auth/signup'
     types: {
-      body: ExtractBody<InferInput<(typeof import('#validators/user').signupValidator)>>
+      body: ExtractBody<InferInput<(typeof import('#validators/user_validator').signupValidator)>>
       paramsTuple: []
       params: {}
-      query: ExtractQuery<InferInput<(typeof import('#validators/user').signupValidator)>>
+      query: ExtractQuery<InferInput<(typeof import('#validators/user_validator').signupValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/new_account_controller').default['store']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/new_account_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
@@ -23,10 +23,10 @@ export interface Registry {
     methods: ["POST"]
     pattern: '/api/v1/auth/login'
     types: {
-      body: ExtractBody<InferInput<(typeof import('#validators/user').loginValidator)>>
+      body: ExtractBody<InferInput<(typeof import('#validators/user_validator').loginValidator)>>
       paramsTuple: []
       params: {}
-      query: ExtractQuery<InferInput<(typeof import('#validators/user').loginValidator)>>
+      query: ExtractQuery<InferInput<(typeof import('#validators/user_validator').loginValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/access_tokens_controller').default['store']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/access_tokens_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
     }

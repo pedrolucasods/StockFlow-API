@@ -4,21 +4,85 @@ type ParamValue = string | number | bigint | boolean
 
 export type ScannedRoutes = {
   ALL: {
-    'auth.new_account.store': { paramsTuple?: []; params?: {} }
-    'auth.access_tokens.store': { paramsTuple?: []; params?: {} }
+    'auth.register': { paramsTuple?: []; params?: {} }
+    'auth.login': { paramsTuple?: []; params?: {} }
+    'auth.forgot_password': { paramsTuple?: []; params?: {} }
+    'auth.reset_password': { paramsTuple?: []; params?: {} }
+    'users.list': { paramsTuple?: []; params?: {} }
+    'users.search_user': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'users.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'users.update_status': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'suppliers.list': { paramsTuple?: []; params?: {} }
+    'suppliers.search_supplier': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'suppliers.create': { paramsTuple?: []; params?: {} }
+    'suppliers.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'suppliers.delete': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'categories.list': { paramsTuple?: []; params?: {} }
+    'categories.search_category': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'categories.create': { paramsTuple?: []; params?: {} }
+    'categories.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'categories.delete': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'products.list': { paramsTuple?: []; params?: {} }
+    'products.search_produtc': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'products.create': { paramsTuple?: []; params?: {} }
+    'products.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'products.delete': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'stock_movements.list': { paramsTuple?: []; params?: {} }
+    'stock_movements.search_stockmovement': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'stock_movements.create': { paramsTuple?: []; params?: {} }
     'profile.profile.show': { paramsTuple?: []; params?: {} }
     'profile.access_tokens.destroy': { paramsTuple?: []; params?: {} }
   }
   GET: {
+    'users.list': { paramsTuple?: []; params?: {} }
+    'users.search_user': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'suppliers.list': { paramsTuple?: []; params?: {} }
+    'suppliers.search_supplier': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'categories.list': { paramsTuple?: []; params?: {} }
+    'categories.search_category': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'products.list': { paramsTuple?: []; params?: {} }
+    'products.search_produtc': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'stock_movements.list': { paramsTuple?: []; params?: {} }
+    'stock_movements.search_stockmovement': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'profile.profile.show': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
+    'users.list': { paramsTuple?: []; params?: {} }
+    'users.search_user': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'suppliers.list': { paramsTuple?: []; params?: {} }
+    'suppliers.search_supplier': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'categories.list': { paramsTuple?: []; params?: {} }
+    'categories.search_category': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'products.list': { paramsTuple?: []; params?: {} }
+    'products.search_produtc': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'stock_movements.list': { paramsTuple?: []; params?: {} }
+    'stock_movements.search_stockmovement': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'profile.profile.show': { paramsTuple?: []; params?: {} }
   }
   POST: {
-    'auth.new_account.store': { paramsTuple?: []; params?: {} }
-    'auth.access_tokens.store': { paramsTuple?: []; params?: {} }
+    'auth.register': { paramsTuple?: []; params?: {} }
+    'auth.login': { paramsTuple?: []; params?: {} }
+    'auth.forgot_password': { paramsTuple?: []; params?: {} }
+    'suppliers.create': { paramsTuple?: []; params?: {} }
+    'categories.create': { paramsTuple?: []; params?: {} }
+    'products.create': { paramsTuple?: []; params?: {} }
+    'stock_movements.create': { paramsTuple?: []; params?: {} }
     'profile.access_tokens.destroy': { paramsTuple?: []; params?: {} }
+  }
+  PATCH: {
+    'auth.reset_password': { paramsTuple?: []; params?: {} }
+    'users.update_status': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+  }
+  PUT: {
+    'users.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'suppliers.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'categories.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'products.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+  }
+  DELETE: {
+    'suppliers.delete': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'categories.delete': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'products.delete': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
 }
 declare module '@adonisjs/core/types/http' {

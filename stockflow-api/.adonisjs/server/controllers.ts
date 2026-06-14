@@ -3,8 +3,15 @@
  * DO NOT EDIT manually
  */
 
+
 export const controllers = {
   AccessTokens: () => import('#controllers/access_tokens_controller'),
   NewAccount: () => import('#controllers/new_account_controller'),
   Profile: () => import('#controllers/profile_controller'),
+  AuthController:() => import('#controllers/auth_controller'),
+  UsersController:() => import('#controllers/users_controller'),
+  SuppliersController:() => import('#controllers/suppliers_controller'),
+  CategoriesController:() => import('#controllers/categories_controller'),
+  ProductsController:() => import('#controllers/products_controller'),
+  StockMovementsController:() => import('#controllers/stock_movements_controller')
 }
